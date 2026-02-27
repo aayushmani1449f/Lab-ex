@@ -1,43 +1,39 @@
-fleet_data = [
-    {
-        "ship_name": "Ocean Quest",
-        "containers": [
-            {
-                "container_id": "OQ-101",
-                "items": [
-                    {"name": "Large Glass Vase", "is_fragile": True, "destination": "LON", "weight": 12},
-                    {"name": "Steel Beams", "is_fragile": False, "destination": "LON", "weight": 500},    
-                    {"name": "Antique Mirror", "is_fragile": True, "destination": "NYC", "weight": 15},   
-                ]
-            }
-        ]
-    },
-    {
-        "ship_name": "Sea Empress",
-        "containers": [
-            {
-                "container_id": "SE-205",
-                "items": [
-                    {"name": "Porcelain Bathtub", "is_fragile": True, "destination": "LON", "weight": 45},
-                    {"name": "Crystal Glasses", "is_fragile": True, "destination": "LON", "weight": 5},    
-                ]
-            }
-        ]
-    }
-]
-
-def extract_fragile_heavy_lon_items(fleet):
-    filtered_items = [
-        item["name"]                                  
-        for ship in fleet                             
-        for container in ship["containers"]           
-        for item in container["items"]                
-        if item.get("is_fragile") == True             
-        and item.get("destination") == "LON"          
-        and item.get("weight", 0) > 10                
+user = {
+    "username": "aayush_mani",
+    "posts": [
+        {
+            "post_id": 1,
+            "comments": [
+                {"comment_id": 101, "likes": 5},
+                {"comment_id": 102, "likes": 12}
+            ]
+        },
+        {
+            "post_id": 2,
+            "comments": [
+                {"comment_id": 103, "likes": 0},
+                {"comment_id": 104, "likes": 8},
+                {"comment_id": 105, "likes": 20}
+            ]
+        }
     ]
-    
-    return filtered_items
+}
 
-result = extract_fragile_heavy_lon_items(fleet_data)
-print(result)
+def calculate(data):
+    total_likes = 0
+    
+    posts = data.get("posts", [])
+    
+    for post in posts:
+        comments = post.get("comments", [])
+        
+        for comment in comments:
+            likes = comment.get("likes", 0)
+            
+            total_likes += likes
+            
+    return total_likes
+
+final_likes_count = calculate(user)
+
+print(final_likes_count)
