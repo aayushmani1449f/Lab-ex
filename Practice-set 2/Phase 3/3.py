@@ -1,20 +1,21 @@
-orders = [
-    {"customer_id": 101, "item": "Laptop"},
-    {"customer_id": 102, "item": "Mouse"},
-    {"customer_id": 101, "item": "Keyboard"},
-    {"customer_id": 103, "item": "Monitor"},
-    {"customer_id": 102, "item": "USB Cable"}
+readings = [
+    {"temp": 32, "unit": "F"},
+    {"temp": 20, "unit": "C"},
+    {"temp": -200, "unit": "F"},
+    {"temp": -500, "unit": "C"}
 ]
 
-grouped_orders = {}
-
-for order in orders:
-    cid = order["customer_id"]
-    item = order["item"]
-    
-    if cid not in grouped_orders:
-        grouped_orders[cid] = []
+def normalize_to_celsius(reading):
+    temp = reading["temp"]
+    if reading["unit"] == "F":
+        celsius = (temp - 32) * 5.0 / 9.0
+    else:
+        celsius = temp
         
-    grouped_orders[cid].append(item)
+    if celsius >= -273.15:
+        return round(celsius, 2)
+    return None
 
-print(grouped_orders)
+normalized_temps = list(filter(lambda x: x is not None, map(normalize_to_celsius, readings)))
+
+print(normalized_temps)
