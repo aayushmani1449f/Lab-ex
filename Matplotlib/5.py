@@ -1,0 +1,17 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.arange(1, 6)
+y1 = x
+y2 = x**2
+y3 = 1 / x
+
+plt.plot(x, y1, label="y = x")
+plt.plot(x, y2, label="y = x^2")
+plt.plot(x, y3, label="y = 1/x")
+
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("Line Chart With Legends")
+plt.legend()
+plt.show()
